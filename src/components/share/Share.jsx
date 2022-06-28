@@ -3,11 +3,13 @@ import { icons } from "../../utils/icons";
 const { BedIcon, EmojiEmotionsIcon, LabelIcon, PermMediaIcon } = icons;
 
 export default function Share() {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER
+
   return (
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
-          <img className="shareProfileImg" src="/assets/person/1.jpeg" alt="" />
+          <img className="shareProfileImg" src={`${PF}/person/1.jpeg`} alt="" />
           <input
             placeholder="What's in your mind Safak?"
             className="shareInput"
