@@ -46,11 +46,7 @@ export default function Login() {
               minLength="6"
             />
             <button className="loginButton" type="submit" disabled={isFetching}>
-              {isFetching ? (
-                <CircularProgress color="success" size="32px" />
-              ) : (
-                "Log In"
-              )}
+              {isFetching ? <CircularProgress size="32px" /> : "Log In"}
             </button>
             <span className="loginForgot">Forgot Password?</span>
             <button className="loginRegisterButton">
