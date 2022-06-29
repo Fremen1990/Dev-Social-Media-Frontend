@@ -3,8 +3,8 @@ import { icons } from "../../utils/icons";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useRef, useState } from "react";
 import axios from "axios";
-import { API } from "../../config";
-
+import { API, photos } from "../../config";
+import CancelIcon from "@mui/icons-material/Cancel";
 const { BedIcon, EmojiEmotionsIcon, LabelIcon, PermMediaIcon } = icons;
 
 export default function Share() {
@@ -20,21 +20,20 @@ export default function Share() {
       desc: desc.current.value,
     };
     if (file) {
-      const data =  new FormData();
+      const data = new FormData();
       const fileName = Date.now() + file.name;
-       data.append("file", file);
-       data.append("name", fileName);
+      data.append("name", fileName);
+      data.append("file", file);
       newPost.img = fileName;
-      // todo issue with files upload with req.body.name
       try {
         await axios.post(`${API}upload`, data);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     }
     try {
       await axios.post(`${API}posts`, newPost);
-      // window.location.reload(); // todo create post context and update post state after upload
+      window.location.reload(); // todo create post context and update post state after upload
     } catch (err) {}
   };
 
@@ -46,8 +45,8 @@ export default function Share() {
             className="shareProfileImg"
             src={
               user.profilePicture
-                ? `${PF}${user.profilePicture}`
-                : `${PF}/person/noAvatar.png`
+                ? `${photos}/${user.profilePicture}`
+                : `${photos}/person/noAvatar.png`
             }
             alt=""
           />
@@ -58,6 +57,17 @@ export default function Share() {
           />
         </div>
         <hr className="shareHr" />
+
+        {file && (
+          <div className="shareImgContainer">
+            <img src={URL.createObjectURL(file)} alt="" className="shareImg" />
+            <CancelIcon
+              className="shareCancelImg"
+              onClick={() => setFile(null)}
+            />
+          </div>
+        )}
+
         <form className="shareBottom" onSubmit={submitHandler}>
           <div className="shareOptions">
             <label htmlFor="file" className="shareOption">
@@ -92,5 +102,3 @@ export default function Share() {
     </div>
   );
 }
-
-// TODO 3 STEPS BACK -> CHECK FILES UPLOAD

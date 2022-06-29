@@ -12,12 +12,15 @@ export default function Feed({ username }) {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    console.log("USER", user);
     const fetchPosts = async () => {
       const res = username
         ? await axios.get(`${API}posts/profile/${username}`)
         : await axios.get(`${API}posts/timeline/${user._id}`);
-      setPosts(res.data);
+      setPosts(
+        res.data.sort((post1, post2) => {
+          return new Date(post2.createdAt) - new Date(post1.createdAt);
+        })
+      );
     };
     fetchPosts();
   }, [username, user._id]);
@@ -25,7 +28,7 @@ export default function Feed({ username }) {
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share />
+        {(!username || username === user.username) && <Share />}
         {posts.map((p) => (
           <Post key={p._id} post={p} />
         ))}

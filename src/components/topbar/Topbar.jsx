@@ -1,6 +1,7 @@
 import "./topbar.css";
 import { Link } from "react-router-dom";
 
+import { photos } from "../../config";
 import { icons } from "../../utils/icons";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
@@ -28,8 +29,12 @@ export default function Topbar() {
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">
-          <span className="topbarLink">Homepage</span>
-          <span className="topbarLink">Timeline</span>
+          <Link to="/" className="topbarLink">
+            Homepage
+          </Link>
+          <Link to={`/profile/${user.username}`} className="topbarLink">
+            Timeline
+          </Link>
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
@@ -49,8 +54,8 @@ export default function Topbar() {
           <img
             src={
               user.profilePicture
-                ? `${PF}${user.profilePicture}`
-                : PF + "/person/noAvatar.png"
+                ? `${photos}/${user.profilePicture}`
+                : `${photos}/person/noAvatar.png`
             }
             alt=""
             className="topbarImg"
