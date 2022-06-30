@@ -91,3 +91,8 @@
     font-weight: 500;
     cursor: pointer;
 }
+.loginRegisterButtonLink{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
