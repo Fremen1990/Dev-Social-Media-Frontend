@@ -41,6 +41,11 @@ const AuthReducer = (state, action) => {
           ),
         },
       };
+    case "LOAD_USER_POSTS":
+      return {
+        ...state,
+        posts: action.payload,
+      };
 
     default:
       return state;

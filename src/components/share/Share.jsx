@@ -33,7 +33,8 @@ export default function Share() {
     }
     try {
       await axios.post(`${API}posts`, newPost);
-      window.location.reload(); // todo create post context and update post state after upload
+      // window.location.reload(); // todo create post context and update post state after upload
+      await setFile(null);
     } catch (err) {}
   };
 
@@ -94,6 +95,7 @@ export default function Share() {
               <span className="shareOptionText">Feelings</span>
             </div>
           </div>
+
           <button className="shareButton" type="submit">
             Share
           </button>

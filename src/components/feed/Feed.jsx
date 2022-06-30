@@ -9,7 +9,7 @@ import { AuthContext } from "../../context/AuthContext";
 export default function Feed({ username }) {
   const [posts, setPosts] = useState([]);
 
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -23,7 +23,7 @@ export default function Feed({ username }) {
       );
     };
     fetchPosts();
-  }, [username, user._id]);
+  }, [username, user._id, posts]);
 
   return (
     <div className="feed">

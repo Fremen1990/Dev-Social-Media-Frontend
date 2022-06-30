@@ -26,3 +26,8 @@ export const Unfollow = (userId) => ({
   type: "UNFOLLOW",
   payload: userId,
 });
+
+export const LoadUserPosts = (posts) => ({
+  type: "LOAD_USER_POSTS",
+  payload: posts,
+});
