@@ -1,15 +1,17 @@
 import "./login.css";
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { loginCall } from "../../apiCalls";
 import { AuthContext } from "../../context/AuthContext";
 import { CircularProgress } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export default function Login() {
   const email = useRef();
   const password = useRef();
 
   const { user, isFetching, error, dispatch } = useContext(AuthContext);
+  const [cookies, setCookie, removeCookie] = useCookies([]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -17,7 +19,17 @@ export default function Login() {
       { email: email.current.value, password: password.current.value },
       dispatch
     );
+    setCookie("IsLoggedIn", true);
+    console.log("COOKIES", cookies);
   };
+
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem("user");
+  //   if (loggedInUser) {
+  //     const checkedUser = JSON.parse(loggedInUser);
+  //     // setUser(checkedUser);
+  //   }
+  // }, []);
 
   return (
     <div className="login">

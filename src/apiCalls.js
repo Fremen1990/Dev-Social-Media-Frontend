@@ -6,6 +6,8 @@ export const loginCall = async (userCredential, dispatch) => {
   try {
     const res = await axios.post(`${API}auth/login`, userCredential);
     dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+    localStorage.setItem("user", res.data);
+    console.log("local storage user", res.data);
   } catch (err) {
     dispatch({ type: "LOGIN_FAILURE", payload: err });
   }

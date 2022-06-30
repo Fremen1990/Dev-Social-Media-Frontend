@@ -77,6 +77,21 @@
   color:deepskyblue;
 }
 
+.LogOutButton{
+  margin-right: 30px;
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  color:white;
+  transition: 0.5s;
+background: none;
+  border:none
+}
+
+.LogOutButton:hover{
+  color:darkred;
+}
+
 .topbarIcons {
   display: flex;
 }

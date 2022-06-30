@@ -1,15 +1,17 @@
 import "./topbar.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import { photos } from "../../config";
 import { icons } from "../../utils/icons";
 import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 const { ChatIcon, SearchIcon, PersonIcon, NotificationsIcon } = icons;
 
 export default function Topbar() {
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const navigate = useNavigate();
 
   return (
     <div className="topbarContainer">
@@ -35,6 +37,17 @@ export default function Topbar() {
           <Link to={`/profile/${user.username}`} className="topbarLink">
             Timeline
           </Link>
+          <button
+            className="LogOutButton"
+            onClick={(e) => {
+              dispatch({ type: "LOGOUT", payload: null });
+
+              navigate("/");
+              console.log(user);
+            }}
+          >
+            Logout
+          </button>
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
